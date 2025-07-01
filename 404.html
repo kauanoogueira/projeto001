@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pedido Irrecusável ❤️</title>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      width: 100%;
+      font-family: Arial, sans-serif;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+
+      /* ✅ IMAGEM LOCAL COMO FUNDO */
+      background: url('img1.jpg') no-repeat center center;
+      background-size: cover;
+      color: white;
+    }
+
+    h1 {
+      text-align: center;
+      margin: 20px;
+      font-size: 1.8em;
+      text-shadow: 2px 2px 4px #000;
+    }
+
+    #buttons {
+      display: flex;
+      gap: 20px;
+      position: relative;
+      max-width: 400px;
+      width: 100%;
+      height: 300px;
+      overflow: hidden;
+      align-items: center;
+      justify-content: center;
+      touch-action: manipulation;
+    }
+
+    button {
+      padding: 16px 32px;
+      font-size: 1.2em;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: left 0.5s ease, top 0.5s ease;
+      box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.5);
+      position: relative;
+    }
+
+    #sim {
+      background-color: green;
+      color: white;
+    }
+
+    #nao {
+      background-color: red;
+      color: white;
+    }
+  </style>
+</head>
+<body>
+  <h1>Quer casar comigo? ❤️</h1>
+  <div id="buttons">
+    <button id="sim">Sim</button>
+    <button id="nao">Não</button>
+  </div>
+
+  <script>
+    const btnNao = document.getElementById('nao');
+    const btnSim = document.getElementById('sim');
+    const container = document.getElementById('buttons');
+
+    let fugindo = false;
+
+    function moverBotao(e) {
+      e.preventDefault();
+
+      if (!fugindo) {
+        btnNao.style.position = 'absolute';
+        btnNao.style.left = btnNao.offsetLeft + 'px';
+        btnNao.style.top = btnNao.offsetTop + 'px';
+        fugindo = true;
+      }
+
+      const containerRect = container.getBoundingClientRect();
+      const maxX = containerRect.width - btnNao.offsetWidth;
+      const maxY = containerRect.height - btnNao.offsetHeight;
+
+      const randX = Math.random() * maxX;
+      const randY = Math.random() * maxY;
+
+      btnNao.style.left = `${randX}px`;
+      btnNao.style.top = `${randY}px`;
+    }
+
+    btnNao.addEventListener('mouseenter', moverBotao);
+    btnNao.addEventListener('touchstart', moverBotao);
+
+    btnSim.addEventListener('click', () => {
+      alert('Eu sabia que você diria SIM! ❤️💍');
+    });
+  </script>
+</body>
+</html>
